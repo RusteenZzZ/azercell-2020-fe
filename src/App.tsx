@@ -11,7 +11,7 @@ import { theme } from './utils/theme';
 
 import './styles/tailwind.css';
 
-function App() {
+const App: React.FC = () => {
   return (
     <ThemeProvider theme={theme}>
       <BrowserRouter>
@@ -36,6 +36,6 @@ function App() {
       </BrowserRouter>
     </ThemeProvider>
   );
-}
+};
 
 export default App;

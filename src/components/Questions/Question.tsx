@@ -1,6 +1,8 @@
 import React from 'react';
 
+import { CheckboxQuestion } from './CheckboxQuestion';
 import { QuestionTitle } from './QuestionTItle';
+import { RadioQuestion } from './RadioQuestion';
 import { TextQuestion } from './TextQuestion';
 
 export enum QuestionType {
@@ -28,7 +30,7 @@ export const QuestionComponent: React.FC<QuestionProps> = ({
   penalty,
   coefficient,
   type,
-  ...props
+  options,
 }) => {
   const [value, setValue] = React.useState<string | string[]>('');
 
@@ -48,6 +50,20 @@ export const QuestionComponent: React.FC<QuestionProps> = ({
         </div>
         {type === QuestionType.text && (
           <TextQuestion value={value as string} onChange={setValue} />
+        )}
+        {type === QuestionType.checkbox && options && (
+          <CheckboxQuestion
+            options={options}
+            answers={value as string[]}
+            onChange={setValue}
+          />
+        )}
+        {type === QuestionType.radio && options && (
+          <RadioQuestion
+            options={options}
+            answer={value as string}
+            onChange={setValue}
+          />
         )}
       </div>
     </div>
