@@ -3,4 +3,5 @@ export const ROUTES = {
   register: '/register',
   dashboard: '/dashboard',
   profile: '/profile',
+  newExam: '/exams/new',
 };
