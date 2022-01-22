@@ -10,6 +10,7 @@ import { AuthContext } from '../context/AuthContext';
 import { Exam } from '../models/types';
 import { ROUTES } from '../routes';
 import { addAuthHeader, api } from '../utils/axios';
+import { MarkdownPreview } from '../utils/markdown';
 
 type ParamsType = {
   examId: string;
@@ -22,6 +23,11 @@ export const ExamPage: React.FC = () => {
 
   const [exam, setExam] = React.useState<Exam | null>();
   const [loading, setLoading] = React.useState<boolean>(false);
+
+  const handleStart = React.useCallback(async () => {
+    if (!token) return;
+    api.post(`/exams/${examId}`, {}, { headers: {} });
+  }, [token, examId]);
 
   React.useEffect(() => {
     if (exam || loading || !token) return;
@@ -82,7 +88,7 @@ export const ExamPage: React.FC = () => {
         {exam.description && (
           <div>
             <p className="mb-2 text-xl font-medium">Description</p>
-            <div>{exam.description}</div>
+            <MarkdownPreview mdContent={exam.description} />
           </div>
         )}
         <div className="flex justify-end mt-4">
