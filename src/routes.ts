@@ -4,4 +4,5 @@ export const ROUTES = {
   dashboard: '/dashboard',
   profile: '/profile',
   newExam: '/exams/new',
+  exam: '/exams/:examId',
 };

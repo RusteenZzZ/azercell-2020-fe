@@ -58,6 +58,7 @@ export const NewExam: React.FC = () => {
               variant="contained"
               className="font-bold text-white"
               disabled={!canCreate}
+              disableElevation
             >
               Create
             </Button>

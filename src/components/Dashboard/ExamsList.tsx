@@ -58,7 +58,10 @@ export const ExamsList: React.FC<ExamsListProps> = ({ exams }) => {
 };
 
 const ExamComponent: React.FC<{ exam: Exam }> = ({ exam }) => (
-  <div className="flex items-center justify-between flex-grow pt-3 pb-2 border-b-2 cursor-pointer border-primary-5">
+  <Link
+    to={ROUTES.exam.replace(':examId', exam.id.toString())}
+    className="flex items-center justify-between flex-grow pt-3 pb-2 border-b-2 cursor-pointer border-primary-5"
+  >
     <p className="w-5/12 m-0 text-sm font-bold md:text-base">{exam.title}</p>
     <div className="w-2/12 font-bold text-center">{exam.numOfQuestions}</div>
     <div className="w-2/12 font-bold text-center">
@@ -75,5 +78,5 @@ const ExamComponent: React.FC<{ exam: Exam }> = ({ exam }) => (
     <div className="w-3/12 text-right">
       <ExamDifficultyBadge difficulty={exam.difficulty} />
     </div>
-  </div>
+  </Link>
 );

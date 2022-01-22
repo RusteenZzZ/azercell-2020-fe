@@ -8,6 +8,7 @@ import { PublicRoute } from './components/PublicRoute';
 import { AuthContextProvider } from './context/AuthContext';
 import { DataContextProvider } from './context/DataContext';
 import { Dashboard } from './pages/Dashboard';
+import { ExamPage } from './pages/Exam';
 import { Login } from './pages/Login';
 import { NewExam } from './pages/NewExam';
 import { Register } from './pages/Register';
@@ -52,6 +53,14 @@ const App: React.FC = () => {
                 element={
                   <PrivateRoute>
                     <NewExam />
+                  </PrivateRoute>
+                }
+              />
+              <Route
+                path={ROUTES.exam}
+                element={
+                  <PrivateRoute>
+                    <ExamPage />
                   </PrivateRoute>
                 }
               />
