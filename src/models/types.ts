@@ -17,7 +17,6 @@ export enum ExamDifficulty {
 }
 
 export enum ExamStatus {
-  notStarted = 'NOT_STARTED',
   onGoing = 'ONGOING',
   finished = 'FINISHED',
 }

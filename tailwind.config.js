@@ -25,7 +25,10 @@ module.exports = {
     },
     extend: {
       colors: {
-        primary: '#ff7900',
+        primary: {
+          DEFAULT: '#ff7900',
+          5: '#FFD2B5',
+        },
         transparent: 'transparent',
       },
     },

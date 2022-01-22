@@ -17,3 +17,7 @@ html {
 
 @layer components {
 }
+
+svg.star-svg {
+  display: inline;
+}

@@ -34,10 +34,17 @@ export const DataContextProvider: React.FC<DataContextProviderProps> = ({
     setRequested(true);
 
     const fetchData = async () => {
-      const response = await api.get('/topics', {
+      let response = await api.get('/topics', {
         headers: { ...addAuthHeader(token) },
       });
+
       setTopics(response.data);
+
+      response = await api.get('/exams', {
+        headers: { ...addAuthHeader(token) },
+      });
+
+      setExams(response.data);
     };
 
     fetchData();
