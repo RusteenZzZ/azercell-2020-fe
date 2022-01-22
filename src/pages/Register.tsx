@@ -17,7 +17,11 @@ const validationSchema = yup.object().shape({
   password: yup
     .string()
     .required('Password is required')
-    .test('length', 'Password should', (value) => (value?.length || 0) > 6),
+    .test(
+      'length',
+      'Password should be at least 6 characters',
+      (value) => (value?.length || 0) >= 6,
+    ),
   confirm: yup
     .string()
     .required('Password confirm is required')
@@ -106,33 +110,9 @@ export const Register: React.FC = () => {
           <TextField
             size="small"
             className="mb-6"
-            name="confirm"
-            type="password"
-            placeholder="Password"
-            variant="outlined"
-            value={values.confirm}
-            onChange={handleChange}
-            onBlur={handleBlur}
-            InputProps={{
-              startAdornment: (
-                <LockOutlinedIcon fontSize="small" className="mr-2" />
-              ),
-            }}
-            helperText={touched.confirm ? errors.confirm : ''}
-            error={touched.confirm && !!errors.confirm}
-            FormHelperTextProps={{
-              style: {
-                height: 0,
-              },
-            }}
-            fullWidth
-          />
-          <TextField
-            size="small"
-            className="mb-6"
             name="password"
             type="password"
-            placeholder="Confirm password"
+            placeholder="Password"
             variant="outlined"
             value={values.password}
             onChange={handleChange}
@@ -144,6 +124,30 @@ export const Register: React.FC = () => {
             }}
             helperText={touched.password ? errors.password : ''}
             error={touched.password && !!errors.password}
+            FormHelperTextProps={{
+              style: {
+                height: 0,
+              },
+            }}
+            fullWidth
+          />
+          <TextField
+            size="small"
+            className="mb-6"
+            name="confirm"
+            type="password"
+            placeholder="Confirm password"
+            variant="outlined"
+            value={values.confirm}
+            onChange={handleChange}
+            onBlur={handleBlur}
+            InputProps={{
+              startAdornment: (
+                <LockOutlinedIcon fontSize="small" className="mr-2" />
+              ),
+            }}
+            helperText={touched.confirm ? errors.confirm : ''}
+            error={touched.confirm && !!errors.confirm}
             FormHelperTextProps={{
               style: {
                 height: 0,
@@ -166,6 +170,10 @@ export const Register: React.FC = () => {
           >
             Register
           </Button>
+
+          <div className="mt-4 text-center text-red-600">
+            <span>{error}</span>
+          </div>
         </form>
       )}
     </Formik>
