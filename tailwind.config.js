@@ -1,3 +1,7 @@
+/* eslint-disable @typescript-eslint/no-require-imports */
+/* eslint-disable @typescript-eslint/no-var-requires */
+/* eslint-disable unicorn/prefer-module */
+/* eslint-disable no-undef */
 const colors = require('tailwindcss/colors');
 
 module.exports = {
@@ -21,6 +25,7 @@ module.exports = {
     },
     extend: {
       colors: {
+        primary: '#ff7900',
         transparent: 'transparent',
       },
     },
