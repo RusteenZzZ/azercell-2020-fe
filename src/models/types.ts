@@ -31,6 +31,7 @@ export type Exam = {
   description: string;
   rate: number;
   averageScore: number;
+  topicId: number;
 };
 
 export enum QuestionType {

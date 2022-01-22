@@ -17,11 +17,17 @@ export const Dashboard: React.FC = () => {
   const [query, setQuery] = React.useState<string>('');
 
   const filteredExams = React.useMemo<Exam[]>(() => {
-    // const filteredByTopics = exams.filter(exam => selectedTopics.includes(exam.))
-    return exams.filter((exam) =>
+    const filteredByTopics =
+      selectedTopics.length > 0
+        ? exams.filter((exam) =>
+            selectedTopics.some((topic) => topic.id === exam.topicId),
+          )
+        : exams;
+
+    return filteredByTopics.filter((exam) =>
       exam.title.toLowerCase().includes(query.toLowerCase()),
     );
-  }, [exams, query]);
+  }, [exams, query, selectedTopics]);
 
   return (
     <div className="flex flex-col px-4 -mx-2 md:px-12 md:flex-row md:space-y-0 space-y-4">

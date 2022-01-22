@@ -15,6 +15,12 @@ type ExamsListProps = {
 export const ExamsList: React.FC<ExamsListProps> = ({ exams }) => {
   return (
     <div className="flex flex-col flex-grow">
+      {exams.length > 0 && (
+        <div className="flex justify-end pr-4 mb-2 text-sm font-medium">
+          Number of results:{' '}
+          <span className="ml-1 font-bold text-primary">{exams.length}</span>
+        </div>
+      )}
       <div className="flex w-full max-h-full pr-4">
         <div className="w-5/12 text-sm font-bold text-gray-600 md:text-base">
           Name
