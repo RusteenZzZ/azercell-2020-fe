@@ -14,7 +14,7 @@ export const CheckboxQuestion: React.FC<CheckboxQuestionProps> = ({
   onChange,
 }) => (
   <FormGroup>
-    {options.map((value, index) => {
+    {options.map((value) => {
       const isChecked = answers.includes(value);
 
       return (

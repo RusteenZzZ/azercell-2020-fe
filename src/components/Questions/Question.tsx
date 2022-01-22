@@ -1,24 +1,11 @@
 import React from 'react';
 
+import { Question, QuestionType } from '../../models/types';
+
 import { CheckboxQuestion } from './CheckboxQuestion';
 import { QuestionTitle } from './QuestionTItle';
 import { RadioQuestion } from './RadioQuestion';
 import { TextQuestion } from './TextQuestion';
-
-export enum QuestionType {
-  checkbox,
-  radio,
-  text,
-}
-
-export type Question = {
-  id: number;
-  title: string;
-  type: QuestionType;
-  options?: string[];
-  coefficient: number;
-  penalty?: number;
-};
 
 type QuestionProps = Question & {
   order: number;
