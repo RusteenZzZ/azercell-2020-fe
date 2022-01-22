@@ -1,7 +1,5 @@
 import React from 'react';
 
-import { useNavigate } from 'react-router-dom';
-
 import { addAuthHeader, api } from '../utils/axios';
 
 export type User = {
@@ -83,7 +81,7 @@ export const AuthContextProvider: React.FC<AuthContextProviderProps> = ({
       try {
         setLoading(true);
         const response = await api.get('/get-user', {
-          headers: { Authorization: `Bearer ${token}` },
+          headers: { ...addAuthHeader(token) },
           params: { token: token },
         });
 

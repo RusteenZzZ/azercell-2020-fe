@@ -1,12 +1,13 @@
-export type Topic = {
-  id: number;
-  title: string;
-};
-
 export type Category = {
   id: number;
   title: string;
   topicId: number;
+};
+
+export type Topic = {
+  id: number;
+  title: string;
+  categories: Category[];
 };
 
 export enum ExamDifficulty {
@@ -20,6 +21,18 @@ export enum ExamStatus {
   onGoing = 'ONGOING',
   finished = 'FINISHED',
 }
+
+export type Exam = {
+  id: number;
+  title: string;
+  status: ExamStatus;
+  difficulty: ExamDifficulty;
+  numOfQuestions: number;
+  numOfParticipated: number;
+  description: string;
+  rate: number;
+  averageScore: number;
+};
 
 export enum QuestionType {
   checkbox = 'CHECKBOX',

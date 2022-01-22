@@ -6,6 +6,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { PrivateRoute } from './components/PrivateRoute';
 import { PublicRoute } from './components/PublicRoute';
 import { AuthContextProvider } from './context/AuthContext';
+import { DataContextProvider } from './context/DataContext';
 import { Dashboard } from './pages/Dashboard';
 import { Login } from './pages/Login';
 import { Register } from './pages/Register';
@@ -18,34 +19,36 @@ const App: React.FC = () => {
   return (
     <ThemeProvider theme={theme}>
       <AuthContextProvider>
-        <BrowserRouter>
-          <Routes>
-            <Route
-              path={ROUTES.login}
-              element={
-                <PublicRoute>
-                  <Login />
-                </PublicRoute>
-              }
-            />
-            <Route
-              path={ROUTES.register}
-              element={
-                <PublicRoute>
-                  <Register />
-                </PublicRoute>
-              }
-            />
-            <Route
-              path={ROUTES.dashboard}
-              element={
-                <PrivateRoute>
-                  <Dashboard />
-                </PrivateRoute>
-              }
-            />
-          </Routes>
-        </BrowserRouter>
+        <DataContextProvider>
+          <BrowserRouter>
+            <Routes>
+              <Route
+                path={ROUTES.login}
+                element={
+                  <PublicRoute>
+                    <Login />
+                  </PublicRoute>
+                }
+              />
+              <Route
+                path={ROUTES.register}
+                element={
+                  <PublicRoute>
+                    <Register />
+                  </PublicRoute>
+                }
+              />
+              <Route
+                path={ROUTES.dashboard}
+                element={
+                  <PrivateRoute>
+                    <Dashboard />
+                  </PrivateRoute>
+                }
+              />
+            </Routes>
+          </BrowserRouter>
+        </DataContextProvider>
       </AuthContextProvider>
     </ThemeProvider>
   );
