@@ -9,10 +9,10 @@ import { Link } from 'react-router-dom';
 import * as yup from 'yup';
 
 import { ROUTES } from '../routes';
+import { api } from '../utils/axios';
 
 const validationSchema = yup.object().shape({
-  firstname: yup.string().required('First name is required'),
-  lastname: yup.string().required('Last name is required'),
+  name: yup.string().required('Name is required'),
   email: yup.string().email('Invalid email').required('Email is required'),
   password: yup
     .string()
@@ -28,18 +28,17 @@ const validationSchema = yup.object().shape({
 
 export const Register: React.FC = () => {
   const [error, setError] = React.useState<string>('');
-  const handleSubmit = React.useCallback(() => {
-    // todo
+  const handleSubmit = React.useCallback(({ name, email, password }) => {
+    api.post('/register', { name, surname: '', email, password });
   }, []);
 
   return (
     <Formik
       initialValues={{
         email: '',
-        firstname: '',
-        lastname: '',
         password: '',
         confirm: '',
+        name: '',
       }}
       validationSchema={validationSchema}
       onSubmit={handleSubmit}
@@ -60,10 +59,10 @@ export const Register: React.FC = () => {
           <TextField
             size="small"
             className="mb-6"
-            name="firstname"
+            name="name"
             placeholder="First name"
             variant="outlined"
-            value={values.firstname}
+            value={values.name}
             onChange={handleChange}
             onBlur={handleBlur}
             InputProps={{
@@ -71,31 +70,8 @@ export const Register: React.FC = () => {
                 <PersonOutlineIcon fontSize="small" className="mr-2" />
               ),
             }}
-            helperText={touched.firstname ? errors.firstname : ''}
-            error={touched.firstname && !!errors.firstname}
-            FormHelperTextProps={{
-              style: {
-                height: 0,
-              },
-            }}
-            fullWidth
-          />
-          <TextField
-            size="small"
-            className="mb-6"
-            name="lastname"
-            placeholder="Last name"
-            variant="outlined"
-            value={values.lastname}
-            onChange={handleChange}
-            onBlur={handleBlur}
-            InputProps={{
-              startAdornment: (
-                <PersonOutlineIcon fontSize="small" className="mr-2" />
-              ),
-            }}
-            helperText={touched.lastname ? errors.lastname : ''}
-            error={touched.lastname && !!errors.lastname}
+            helperText={touched.name ? errors.name : ''}
+            error={touched.name && !!errors.name}
             FormHelperTextProps={{
               style: {
                 height: 0,
@@ -130,9 +106,33 @@ export const Register: React.FC = () => {
           <TextField
             size="small"
             className="mb-6"
-            name="password"
+            name="confirm"
             type="password"
             placeholder="Password"
+            variant="outlined"
+            value={values.confirm}
+            onChange={handleChange}
+            onBlur={handleBlur}
+            InputProps={{
+              startAdornment: (
+                <LockOutlinedIcon fontSize="small" className="mr-2" />
+              ),
+            }}
+            helperText={touched.confirm ? errors.confirm : ''}
+            error={touched.confirm && !!errors.confirm}
+            FormHelperTextProps={{
+              style: {
+                height: 0,
+              },
+            }}
+            fullWidth
+          />
+          <TextField
+            size="small"
+            className="mb-6"
+            name="password"
+            type="password"
+            placeholder="Confirm password"
             variant="outlined"
             value={values.password}
             onChange={handleChange}
@@ -152,7 +152,7 @@ export const Register: React.FC = () => {
             fullWidth
           />
           <Link
-            to={ROUTES.register}
+            to={ROUTES.login}
             className="block mb-2 text-xs text-right text-gray-600 underline"
           >
             Already registered?
@@ -160,6 +160,7 @@ export const Register: React.FC = () => {
           <Button
             variant="contained"
             color="primary"
+            type="submit"
             className="font-bold"
             fullWidth
           >

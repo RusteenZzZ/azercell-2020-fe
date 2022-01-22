@@ -4,9 +4,10 @@ import { Button, TextField } from '@material-ui/core';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import MailOutlinedIcon from '@material-ui/icons/MailOutlined';
 import { Formik } from 'formik';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import * as yup from 'yup';
 
+import { AuthContext } from '../context/AuthContext';
 import { ROUTES } from '../routes';
 
 const validationSchema = yup.object().shape({
@@ -15,10 +16,22 @@ const validationSchema = yup.object().shape({
 });
 
 export const Login: React.FC = () => {
-  const [error, setError] = React.useState<string>('');
-  const handleSubmit = React.useCallback(() => {
-    // todo
-  }, []);
+  const navigate = useNavigate();
+  const { error, isAuth, loading, login, setError } =
+    React.useContext(AuthContext);
+  const handleSubmit = React.useCallback(
+    async ({ email, password }) => {
+      await login(email, password);
+      navigate(ROUTES.dashboard);
+    },
+    [login, navigate],
+  );
+
+  React.useEffect(() => {
+    if (!isAuth || loading) return;
+
+    navigate(ROUTES.dashboard);
+  }, [isAuth, loading, navigate]);
 
   return (
     <Formik
@@ -98,6 +111,7 @@ export const Login: React.FC = () => {
           <Button
             variant="contained"
             color="primary"
+            type="submit"
             className="font-bold"
             fullWidth
           >
