@@ -22,7 +22,7 @@ export const FilterExams: React.FC<FilterExamsProps> = ({
   setSelectedTopics,
 }) => {
   return (
-    <div className="flex flex-col p-4">
+    <div className="flex flex-col pl-4">
       {topics.map((topic) => (
         <div key={topic.id}></div>
       ))}
