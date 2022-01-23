@@ -1,12 +1,18 @@
 import React from 'react';
 
 import { Button, TextField } from '@material-ui/core';
+import { useNavigate } from 'react-router-dom';
 
 import { FilterExams } from '../components/Dashboard/FilterExams';
+import { AuthContext } from '../context/AuthContext';
 import { DataContext } from '../context/DataContext';
 import { Category, Topic } from '../models/types';
+import { ROUTES } from '../routes';
+import { addAuthHeader, api } from '../utils/axios';
 
 export const NewExam: React.FC = () => {
+  const navigate = useNavigate();
+  const { token } = React.useContext(AuthContext);
   const { topics } = React.useContext(DataContext);
   const [selectedTopics, setSelectedTopics] = React.useState<Topic[]>([]);
   const [selectedCategories, setSelectedCategories] = React.useState<
@@ -32,6 +38,32 @@ export const NewExam: React.FC = () => {
       title.length > 0
     );
   }, [selectedCategories, title, questionsCount, maxQuestions]);
+
+  const handleCreate = React.useCallback(async () => {
+    if (!token) return;
+    const response = await api.post(
+      '/exams',
+      {
+        title,
+        topicId: selectedTopics[0].id,
+        numOfQuestions: questionsCount,
+        categoryIds: selectedCategories.map((category) => category.id),
+      },
+      {
+        headers: { ...addAuthHeader(token) },
+      },
+    );
+
+    if (response.data.error) navigate(ROUTES.dashboard);
+    else navigate(ROUTES.ongoingExam.replace(':examId', response.data.id));
+  }, [
+    token,
+    title,
+    questionsCount,
+    selectedCategories,
+    selectedTopics,
+    navigate,
+  ]);
 
   return (
     <div className="flex flex-col px-4 -mx-2 md:px-12 md:flex-row md:space-y-0 space-y-4">
@@ -83,6 +115,7 @@ export const NewExam: React.FC = () => {
               variant="contained"
               className="font-bold text-white"
               disabled={!canCreate}
+              onClick={handleCreate}
               disableElevation
             >
               Create

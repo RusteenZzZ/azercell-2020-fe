@@ -6,7 +6,7 @@ import { ROUTES } from '../../routes';
 
 export const Navbar: React.FC = () => {
   return (
-    <div className="fixed top-0 w-full px-4 py-4 bg-white md:px-12">
+    <div className="fixed top-0 z-50 w-full px-4 py-4 bg-white md:px-12">
       <div className="flex items-center justify-between">
         <Link to={ROUTES.home} className="flex">
           <h1 className="text-3xl font-bold">Examut</h1>
@@ -14,8 +14,6 @@ export const Navbar: React.FC = () => {
         </Link>
         <div className="flex text-lg font-bold space-x-4">
           <Link to={ROUTES.dashboard}>Dashboard</Link>
-          <Link to="">Pricing</Link>
-          <Link to="">About us</Link>
         </div>
       </div>
     </div>

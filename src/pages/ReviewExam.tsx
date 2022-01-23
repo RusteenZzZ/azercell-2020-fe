@@ -19,6 +19,7 @@ type QuestionReviewed = {
   categoryId: number;
   categoryTitle: string;
   id: number;
+  answer: string;
   options?: string;
 };
 
@@ -97,7 +98,7 @@ export const ReviewExam: React.FC = () => {
         <span className="font-bold text-primary">"</span>
       </h2>
       <h3 className="text-xl font-medium text-center md:text-4xl">
-        {review.score.toFixed(2)}{' '}
+        {review.score?.toFixed(2)}{' '}
         <span className="text-2xl font-bold md:text-5xl text-primary">/</span>{' '}
         100
       </h3>
@@ -111,7 +112,7 @@ export const ReviewExam: React.FC = () => {
               <span className="mb-1 text-lg font-medium">
                 {categories[+id]}:{' '}
                 <span className="font-bold text-primary">
-                  {progress.toFixed(2)}%
+                  {progress?.toFixed(2)}%
                 </span>
                 <Progress progress={progress} />
               </span>
@@ -125,7 +126,7 @@ export const ReviewExam: React.FC = () => {
           const isCheckbox = questionReview.type === QuestionType.checkbox;
           const isRadio = questionReview.type === QuestionType.radio;
           const answer = isCheckbox
-            ? questionReview.givenAnswer.split(
+            ? questionReview.givenAnswer?.split(
                 process.env.REACT_APP_DELIMITER ?? '',
               )
             : questionReview.givenAnswer;
@@ -155,6 +156,18 @@ export const ReviewExam: React.FC = () => {
                   readonly
                 />
               </div>
+              {!questionReview.isCorrect && (
+                <div className="flex items-center mt-2 font-medium">
+                  <span className="font-bold text-primary">
+                    Correct answer:
+                  </span>{' '}
+                  {isCheckbox
+                    ? questionReview.answer
+                        .split(process.env.REACT_APP_DELIMITER ?? '')
+                        .join(', ')
+                    : questionReview.answer}
+                </div>
+              )}
               {!questionReview.isCorrect && questionReview.suggestion && (
                 <div className="mt-2">
                   <span className="font-bold text-primary">Suggestion:</span>{' '}
