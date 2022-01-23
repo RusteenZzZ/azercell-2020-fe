@@ -2,6 +2,7 @@ import React from 'react';
 
 import { useNavigate, useParams } from 'react-router';
 
+import { Progress } from '../components/Progress';
 import { QuestionComponent } from '../components/Questions/Question';
 import { AuthContext } from '../context/AuthContext';
 import { QuestionType } from '../models/types';
@@ -102,6 +103,24 @@ export const ReviewExam: React.FC = () => {
         <span className="text-2xl font-bold md:text-5xl text-primary">/</span>{' '}
         100
       </h3>
+
+      <div className="space-y-2">
+        {Object.entries(categoriesStats).map(([id, stat]) => {
+          const progress = (stat.correct / stat.total) * 100;
+
+          return (
+            <div key={id}>
+              <span className="mb-1 text-lg font-medium">
+                {categories[+id]}:{' '}
+                <span className="font-bold text-primary">
+                  {progress.toFixed(2)}%
+                </span>
+                <Progress progress={progress} />
+              </span>
+            </div>
+          );
+        })}
+      </div>
 
       <div className="flex flex-col my-10 space-y-4">
         {review.questionReviews.map((questionReview, index) => {
