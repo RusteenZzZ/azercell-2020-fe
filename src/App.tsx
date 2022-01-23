@@ -11,6 +11,7 @@ import { Dashboard } from './pages/Dashboard';
 import { ExamPage } from './pages/Exam';
 import { Login } from './pages/Login';
 import { NewExam } from './pages/NewExam';
+import { OngoingExam } from './pages/OngoingExam';
 import { Register } from './pages/Register';
 import { ROUTES } from './routes';
 import { theme } from './utils/theme';
@@ -61,6 +62,14 @@ const App: React.FC = () => {
                 element={
                   <PrivateRoute>
                     <ExamPage />
+                  </PrivateRoute>
+                }
+              />
+              <Route
+                path={ROUTES.ongoingExam}
+                element={
+                  <PrivateRoute>
+                    <OngoingExam />
                   </PrivateRoute>
                 }
               />

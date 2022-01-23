@@ -9,6 +9,8 @@ import { TextQuestion } from './TextQuestion';
 
 type QuestionProps = Question & {
   order: number;
+  answer: string | string[];
+  setAnswer: (answer: string | string[]) => void;
 };
 
 export const QuestionComponent: React.FC<QuestionProps> = ({
@@ -16,40 +18,41 @@ export const QuestionComponent: React.FC<QuestionProps> = ({
   order,
   penalty,
   coefficient,
-  type,
   options,
+  type,
+  answer,
+  setAnswer,
 }) => {
-  const [value, setValue] = React.useState<string | string[]>('');
-
   return (
-    <div className="space-y-4">
+    <div className="space-y-2">
       <QuestionTitle title={title} order={order} />
       <div>
-        <div className="flex justify-end mb-4 space-x-4">
-          {penalty && (
-            <span>
-              Penalty: <span className="text-primary">{penalty}</span>
+        <div className="flex mb-4 space-x-4">
+          <span className="font-medium">
+            Coefficient:{' '}
+            <span className="font-bold text-primary">{coefficient}</span>
+          </span>
+          {!!penalty && penalty > 0 && (
+            <span className="font-medium">
+              Penalty: <span className="font-bold text-primary">{penalty}</span>
             </span>
           )}
-          <span>
-            Coefficient: <span className="text-primary">{coefficient}</span>
-          </span>
         </div>
         {type === QuestionType.text && (
-          <TextQuestion value={value as string} onChange={setValue} />
+          <TextQuestion value={answer as string} onChange={setAnswer} />
         )}
         {type === QuestionType.checkbox && options && (
           <CheckboxQuestion
             options={options}
-            answers={value as string[]}
-            onChange={setValue}
+            answers={answer as string[]}
+            onChange={setAnswer}
           />
         )}
         {type === QuestionType.radio && options && (
           <RadioQuestion
             options={options}
-            answer={value as string}
-            onChange={setValue}
+            answer={answer as string}
+            onChange={setAnswer}
           />
         )}
       </div>

@@ -13,10 +13,13 @@ export const TextQuestion: React.FC<TextQuestionProps> = ({
 }) => {
   return (
     <TextField
-      variant="standard"
+      variant="outlined"
       color="primary"
+      placeholder="Answer"
       value={value}
       onChange={(e) => onChange(e.target.value.trimStart())}
+      size="small"
+      fullWidth
     />
   );
 };

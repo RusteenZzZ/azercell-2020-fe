@@ -26,8 +26,16 @@ export const ExamPage: React.FC = () => {
 
   const handleStart = React.useCallback(async () => {
     if (!token) return;
-    api.post(`/exams/${examId}`, {}, { headers: {} });
-  }, [token, examId]);
+    const response = await api.post(
+      `/exams/${examId}`,
+      {},
+      { headers: { ...addAuthHeader(token) } },
+    );
+
+    if (response.data.id)
+      navigate(ROUTES.ongoingExam.replace(':examId', response.data.id));
+    else return null;
+  }, [token, examId, navigate]);
 
   React.useEffect(() => {
     if (exam || loading || !token) return;
@@ -96,6 +104,7 @@ export const ExamPage: React.FC = () => {
             variant="contained"
             color="primary"
             className="font-bold text-white"
+            onClick={handleStart}
             disableElevation
           >
             Start
