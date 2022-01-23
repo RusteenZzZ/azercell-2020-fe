@@ -2,6 +2,7 @@ export type Category = {
   id: number;
   title: string;
   topicId: number;
+  numOfQuestions: number;
 };
 
 export type Topic = {

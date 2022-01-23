@@ -13,10 +13,25 @@ export const NewExam: React.FC = () => {
     Category[]
   >([]);
   const [title, setTitle] = React.useState<string>('');
+  const [questionsCount, setQuestionsCount] = React.useState<number>(0);
+
+  const maxQuestions = React.useMemo<number>(
+    () =>
+      selectedCategories.reduce(
+        (acc, category) => acc + category.numOfQuestions,
+        0,
+      ),
+    [selectedCategories],
+  );
 
   const canCreate = React.useMemo<boolean>(() => {
-    return selectedCategories.length > 0 && title.length > 0;
-  }, [selectedCategories, title]);
+    return (
+      questionsCount <= maxQuestions &&
+      questionsCount > 0 &&
+      selectedCategories.length > 0 &&
+      title.length > 0
+    );
+  }, [selectedCategories, title, questionsCount, maxQuestions]);
 
   return (
     <div className="flex flex-col px-4 -mx-2 md:px-12 md:flex-row md:space-y-0 space-y-4">
@@ -50,6 +65,16 @@ export const NewExam: React.FC = () => {
             value={title}
             onChange={(e) => setTitle(e.target.value.trimStart())}
             fullWidth
+          />
+
+          <TextField
+            variant="outlined"
+            size="small"
+            type="number"
+            InputProps={{ inputProps: { min: 1, max: maxQuestions } }}
+            placeholder="Enter number of exams"
+            value={questionsCount}
+            onChange={(e) => setQuestionsCount(+e.target.value)}
           />
 
           <div className="flex justify-end">
