@@ -9,6 +9,7 @@ import { AuthContextProvider } from './context/AuthContext';
 import { DataContextProvider } from './context/DataContext';
 import { Dashboard } from './pages/Dashboard';
 import { ExamPage } from './pages/Exam';
+import { Home } from './pages/Home';
 import { Login } from './pages/Login';
 import { NewExam } from './pages/NewExam';
 import { OngoingExam } from './pages/OngoingExam';
@@ -40,6 +41,14 @@ const App: React.FC = () => {
                 element={
                   <PublicRoute>
                     <Register />
+                  </PublicRoute>
+                }
+              />
+              <Route
+                path={ROUTES.home}
+                element={
+                  <PublicRoute>
+                    <Home />
                   </PublicRoute>
                 }
               />

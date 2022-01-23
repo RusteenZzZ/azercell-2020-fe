@@ -7,4 +7,5 @@ export const ROUTES = {
   exam: '/exams/:examId',
   ongoingExam: '/exams/:examId/ongoing',
   reviewExam: '/exams/:examId/review',
+  home: '/',
 };

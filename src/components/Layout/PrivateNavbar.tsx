@@ -14,10 +14,10 @@ export const PrivateNavbar: React.FC = () => {
   return (
     <div className="fixed top-0 w-full px-4 py-4 bg-white md:px-12">
       <div className="flex items-center justify-between">
-        <div className="flex">
+        <Link to={ROUTES.home} className="flex">
           <h1 className="text-3xl font-bold">Examut</h1>
           <span className="text-7xl text-primary leading-[5px]">.</span>
-        </div>
+        </Link>
         <div className="flex items-center text-lg font-bold space-x-4">
           <Link to={ROUTES.dashboard}>Dashboard</Link>
           <div
