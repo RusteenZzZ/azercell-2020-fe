@@ -25,14 +25,6 @@ md.renderer.rules.bullet_list_open = () => '<ul class="list-disc pl-8 my-1">';
 md.renderer.rules.blockquote_open = () =>
   '<blockquote class="px-5 py-2 border-l border-blueGray-300 my-1">';
 
-type MarkdownEditorProps = {
-  initialState?: 'write' | 'preview';
-  value: string;
-  label?: string;
-  labelClassName?: string;
-  onChange: (value: string) => void;
-};
-
 type MarkdownPreviewProps = {
   mdContent: string;
   iframeTitle?: string;
@@ -44,7 +36,7 @@ export const MarkdownPreview: React.FC<MarkdownPreviewProps> = React.memo(
   ({ mdContent, className }) => (
     <div>
       <div
-        className={`w-full ${className ?? ''}`}
+        className={`markdown-preview w-full ${className ?? ''}`}
         dangerouslySetInnerHTML={{ __html: md.render(mdContent) }}
       ></div>
     </div>

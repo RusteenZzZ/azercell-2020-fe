@@ -5,6 +5,6 @@ export const ROUTES = {
   profile: '/profile',
   newExam: '/exams/new',
   exam: '/exams/:examId',
-  ongoingExam: '/exams/ongoing/:examId',
-  reviewExam: '/exams/review/:examId',
+  ongoingExam: '/exams/:examId/ongoing',
+  reviewExam: '/exams/:examId/review',
 };

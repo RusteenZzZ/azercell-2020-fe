@@ -5,12 +5,14 @@ import { FormControlLabel, FormGroup, Checkbox } from '@material-ui/core';
 export type CheckboxQuestionProps = {
   options: string[];
   answers: string[];
+  disabled?: boolean;
   onChange: (answer: string[]) => void;
 };
 
 export const CheckboxQuestion: React.FC<CheckboxQuestionProps> = ({
   answers,
   options,
+  disabled,
   onChange,
 }) => (
   <FormGroup>
@@ -25,6 +27,7 @@ export const CheckboxQuestion: React.FC<CheckboxQuestionProps> = ({
               color="primary"
               value={value}
               checked={isChecked}
+              disabled={disabled}
               onChange={() =>
                 onChange(
                   isChecked

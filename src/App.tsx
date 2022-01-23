@@ -12,7 +12,9 @@ import { ExamPage } from './pages/Exam';
 import { Login } from './pages/Login';
 import { NewExam } from './pages/NewExam';
 import { OngoingExam } from './pages/OngoingExam';
+import { Profile } from './pages/Profile';
 import { Register } from './pages/Register';
+import { ReviewExam } from './pages/ReviewExam';
 import { ROUTES } from './routes';
 import { theme } from './utils/theme';
 
@@ -70,6 +72,22 @@ const App: React.FC = () => {
                 element={
                   <PrivateRoute>
                     <OngoingExam />
+                  </PrivateRoute>
+                }
+              />
+              <Route
+                path={ROUTES.profile}
+                element={
+                  <PrivateRoute>
+                    <Profile />
+                  </PrivateRoute>
+                }
+              />
+              <Route
+                path={ROUTES.reviewExam}
+                element={
+                  <PrivateRoute>
+                    <ReviewExam />
                   </PrivateRoute>
                 }
               />

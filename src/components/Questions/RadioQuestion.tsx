@@ -5,12 +5,14 @@ import { FormControlLabel, Radio, RadioGroup } from '@material-ui/core';
 export type RadioQuestionProps = {
   answer: string | null;
   options: string[];
+  disabled?: boolean;
   onChange: (answer: string) => void;
 };
 
 export const RadioQuestion: React.FC<RadioQuestionProps> = ({
   answer,
   options,
+  disabled,
   onChange,
 }) => (
   <RadioGroup>
@@ -24,6 +26,7 @@ export const RadioQuestion: React.FC<RadioQuestionProps> = ({
             <Radio
               color="primary"
               value={option}
+              disabled={disabled}
               onChange={() => onChange(option)}
               size="small"
             />

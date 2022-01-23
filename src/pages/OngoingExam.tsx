@@ -57,6 +57,8 @@ export const OngoingExam: React.FC = () => {
     [currentQuestion],
   );
 
+  console.log(answers);
+
   const handlePrevClick = React.useCallback(() => {
     setCurrentPage((prevCurrentPage) => prevCurrentPage - 1);
   }, []);
@@ -133,14 +135,16 @@ export const OngoingExam: React.FC = () => {
       </div>
       <div className="w-full px-2 md:w-2/3 xl:w-4/5">
         <div className="w-full p-4 border rounded">
-          {currentQuestion && currentAnswer !== null && (
-            <QuestionComponent
-              {...currentQuestion}
-              order={currentPage + 1}
-              answer={currentAnswer}
-              setAnswer={handleSetAnswer}
-            />
-          )}
+          {currentQuestion &&
+            currentAnswer !== null &&
+            currentAnswer !== undefined && (
+              <QuestionComponent
+                {...currentQuestion}
+                order={currentPage + 1}
+                answer={currentAnswer}
+                setAnswer={handleSetAnswer}
+              />
+            )}
           {!showRating ? (
             <div className="flex justify-between mt-4">
               <Button

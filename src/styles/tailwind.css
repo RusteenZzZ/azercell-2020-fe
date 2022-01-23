@@ -21,3 +21,14 @@ html {
 svg.star-svg {
   display: inline;
 }
+
+.markdown-preview a {
+  color: #ff7900;
+  text-decoration: underline;
+  text-decoration-color: #ff7900;
+}
+
+.markdown-preview b,
+.markdown-preview strong {
+  color: #ff7900;
+}

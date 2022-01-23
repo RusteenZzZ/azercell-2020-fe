@@ -4,8 +4,7 @@ import { addAuthHeader, api } from '../utils/axios';
 
 export type User = {
   id: number;
-  firstName: string;
-  lastName: string;
+  name: string;
   email: string;
 };
 
