@@ -57,8 +57,6 @@ export const OngoingExam: React.FC = () => {
     [currentQuestion],
   );
 
-  console.log(answers);
-
   const handlePrevClick = React.useCallback(() => {
     setCurrentPage((prevCurrentPage) => prevCurrentPage - 1);
   }, []);
@@ -131,7 +129,21 @@ export const OngoingExam: React.FC = () => {
   return (
     <div className="flex flex-col px-4 -mx-2 md:px-12 md:flex-row md:space-y-0 space-y-4">
       <div className="w-full px-2 md:w-1/3 xl:w-1/5">
-        <div className="w-full p-4 border rounded"></div>
+        <div className="flex flex-wrap w-full p-4 border rounded">
+          {questions.map((question, index) => (
+            <div
+              key={question.id}
+              className={`w-9 h-10 mb-2 cursor-pointer mr-2 rounded border border-primary flex justify-center items-center font-bold text-sm ${
+                currentPage === index ? 'bg-primary text-white' : 'text-black'
+              }`}
+              onClick={() =>
+                currentPage < questions.length && setCurrentPage(index)
+              }
+            >
+              {index + 1}
+            </div>
+          ))}
+        </div>
       </div>
       <div className="w-full px-2 md:w-2/3 xl:w-4/5">
         <div className="w-full p-4 border rounded">

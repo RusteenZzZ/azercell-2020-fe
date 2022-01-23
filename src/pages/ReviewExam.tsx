@@ -68,8 +68,6 @@ export const ReviewExam: React.FC = () => {
     );
   }, [categories, review]);
 
-  console.log(categoriesStats);
-
   React.useEffect(() => {
     if (!token || !examId || loading || fetched) return;
 
